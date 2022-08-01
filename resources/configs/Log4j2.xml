@@ -1,0 +1,28 @@
+<Configuration>
+	<Properties>
+		<Property name="basePath">./logs</Property>
+	</Properties>
+	<Appenders>
+
+		<RollingFile name="File" filePattern="${basePath}/test_execution_log_%d{yyyy-MM-dd}_%i.log" immediateFlush="true">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %c{2} -%msg%n" />
+
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<SizeBasedTriggeringPolicy size="100 KB" />
+			</Policies>
+		</RollingFile>
+		<Console name="Console">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %c{1} -%msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="trace">
+			<AppenderRef ref="File" />
+		</Root>
+		<!--This is for package level specific ledgers -->
+		<!-- <Logger name="com.letskodeit.overview" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger> -->
+	</Loggers>
+</Configuration>
